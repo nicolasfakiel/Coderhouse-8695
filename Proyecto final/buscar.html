@@ -22,12 +22,12 @@
 <body>
     <nav class="blue darken-3">
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo hide-on-med-and-down" style="padding-left: 15px;">Logo1</a>
-        <a href="#!" class="brand-logo hide-on-large-only">Logo2</a>
+        <a href="index.html" class="brand-logo hide-on-med-and-down" style="padding-left: 15px;">Logo1</a>
+        <a href="index.html" class="brand-logo hide-on-large-only">Logo2</a>
 
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="buscar.html">Buscá un Médico/a</a></li>
+          <li><a href="#">Buscá un Médico/a</a></li>
           <li><a href="valorar.html">Valorá un Médico/a</a></li>
           <li><a href="#">Nosotros</a></li>
           <li><a href="#">Contacto</a></li>
@@ -36,44 +36,40 @@
     </nav>
   
     <ul class="sidenav blue accent-1" id="mobile-demo">
-      <li><a href="buscar.html" class="white-text">Buscá un Médico/a</a></li>
+      <li><a href="#" class="white-text">Buscá un Médico/a</a></li>
       <li><a href="valorar.html" class="white-text">Valorá un Médico/a</a></li>
       <li><a href="#" class="white-text">Nosotros</a></li>
       <li><a href="#" class="white-text">Contacto</a></li>
     </ul>
 
-  <div>
+  
 
     <div class="row">
-      <div class="col s12 m6 offset-m3 center-align">
-        <img class="responsive-img" src="assets/circle.png">
-      </div>
+      <div class="col s12 center-on-small-only">
+        <h4>Buscá un Médico/a</h4>      </div>
     </div>
 
     <div class="row">
-      <div class="col s12 m10 offset-m1 center-align">
-      <h3>Bienvenido/a a DocAdvisor</h3>
+      <div class="col s12">
+				<p>¿Qué médico/a querés buscar?</p>
+				<div class="row">
+					<div class="input-field col s10 offset-s1 m7 offset-m1">
+						<i class="material-icons prefix">textsms</i>
+						<input type="text" id="autocomplete-input" class="autocomplete">
+						<label for="autocomplete-input">Autocomplete</label>
+          </div>
+          <div class="col s10 offset-s1 m3 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" style="">Continuar</a>        
+          </div>
+				</div>
       </div>
     </div>
+		
+  <div class="row container">
+    <br><br>
+"Acá va la información de las valoraciones que tiene el médico elegido arriba"
 
-    <div class="row">
-      <div class="col s12 m10 offset-m1 center-align">
-      <p>En DocAdvisor vas a poder Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Quos, iusto autem. Corrupti, dignissimos. Non voluptas nostrum cumque excepturi 
-        praesentium facere molestiae nesciunt quis, obcaecati voluptate libero. Vero ut 
-        nobis ratione.</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col s12 m10 offset-m1 center-align">
-        <a class="waves-effect waves-light btn-large blue darken-1" style="margin: 10px 50px 10px 50px;" href="buscar.html">Buscá un Médico/a</a>        
-        <a class="waves-effect waves-light btn-large blue darken-1" style="margin: 10px 50px 10px 50px;" href="valorar.html">Valorá un Médico/a</a>
-
-      </div>
-    </div>
-
-  </div>  
+  </div> 
 
 
   <!-- JQuerry -->
