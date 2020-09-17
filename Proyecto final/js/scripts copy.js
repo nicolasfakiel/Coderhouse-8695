@@ -50,13 +50,12 @@ var paciente2 = {
 
 /*VISITAS
 Las visitas son los objetos que unen un médico con un paciente.
-Tienen un lugar, una fecha, un médico, un paciente y todos los puntajes que el paciente le pone al médico.
-Las visitar cuentan con constructor porque es lo que el usuario ingresa en la plataforma*/
+Tienen un lugar, una fecha, un médico, un paciente y todos los puntajes que el paciente le pone al médico*/
 
 var visita1 = {
   fecha: new Date(2020,08,25),
   lugar: doctor1.lugaresDeAtencion[1],
-  doctor: doctor1,
+  medico: doctor1,
   paciente: paciente1,
   puntajePuntualidad: 4,
   PuntajeAmbiente: 2,
@@ -68,7 +67,7 @@ var visita1 = {
 var visita2 = {
   fecha: new Date(2020,09,22),
   lugar: doctor2.lugaresDeAtencion[0],
-  doctor: doctor2,
+  medico: doctor2,
   paciente: paciente2,
   puntajePuntualidad: 5,
   PuntajeAmbiente: 1,
@@ -79,11 +78,11 @@ var visita2 = {
 
 /* Funciones */
 
-/* Constructora de visita: crea una nueva visita y luego asigna los puntajes al médico correspondiente*/
-function nuevaVisita(fecha, lugar, doctor, paciente, puntualidad, ambiente, trato, resultado, recomienda) {
-  this.fecha = new Date(fecha),
+/* Constructora de visita para que el paciente que carga la info de su visita cree una nueva visita*/
+function nuevaVisita(fecha, lugar, medico, paciente, puntualidad, ambiente, trato, resultado, recomienda) {
+  this.fecha = fecha,
   this.lugar = lugar,
-  this.doctor = doctor,
+  this.medico = medico,
   this.paciente = paciente,
   this.puntajePuntualidad = puntualidad,
   this.puntajesAmbiente = ambiente,
@@ -97,53 +96,27 @@ function nuevaVisita(fecha, lugar, doctor, paciente, puntualidad, ambiente, trat
     case 0:
       this.recomienda = false;
   }
-  
-  doctor.puntajesPuntualidad.push(puntualidad)
-  doctor.puntajesAmbiente.push(ambiente)
-  doctor.puntajesTrato.push(trato)
-  doctor.puntajesResultado.push(resultado)
-  switch (recomienda) {
-    case 1:
-      doctor.recomiendan += 1;
-      break;
-    case 0:
-      doctor.noRecomiendan += 1;
-  } 
 }
 
-/* Para sacar el promedio de puntajes de un médico */
-function promediarTodo(Doctor) {
+/* Para agregar un nuevo puntaje a un médico (se usa como ejemplo la categoría Puntualidad) */
+function agregarPuntajePuntualidad(Doctor,PuntajeNuevo) {
+  Doctor.puntajesPuntualidad.push(PuntajeNuevo)
+}
+
+/* Para sacar el promedio de puntajes de un médico (se usa como ejemplo la categoría Puntualidad) */
+function promediarPuntualidad(Doctor) {
   var acum = 0;
   for (let i = 0; i < Doctor.puntajesPuntualidad.length; i++) {
     acum += Doctor.puntajesPuntualidad[i];    
   }
   Doctor.promedioPuntualidad = acum / Doctor.puntajesPuntualidad.length   
-
-  var acum = 0;
-  for (let i = 0; i < Doctor.puntajesAmbiente.length; i++) {
-    acum += Doctor.puntajesAmbiente[i];    
-  }
-  Doctor.promedioAmbiente = acum / Doctor.puntajesAmbiente.length
-  
-  var acum = 0;
-  for (let i = 0; i < Doctor.puntajesTrato.length; i++) {
-    acum += Doctor.puntajesTrato[i];    
-  }
-  Doctor.promedioTrato = acum / Doctor.puntajesTrato.length
-
-  var acum = 0;
-  for (let i = 0; i < Doctor.puntajesResultado.length; i++) {
-    acum += Doctor.puntajesResultado[i];    
-  }
-  Doctor.promedioResultado = acum / Doctor.puntajesResultado.length;
-
 }
+ 
 
-/*Para mostrar los puntajes promediios actuales de un médico, para la sección Buscar.
-Aún no la pude hacer
-*/
+/*Otras funciones que voy a necesitar (y que no me están saliendo):
+Una para mostrar los puntajes actuales de un médico, para la sección Buscar.
+Una para pasar los parámetros de las nuevas visitas al objeto médico correspondiente. 
+ */
 
-/*Nuevo ingreso de visita a modo de ejemplo:
-var visita3 = new nuevaVisita ("2020,07,06", "xxx", doctor1, "paciene", 999,888,777,666,1)
-*/
+
 
