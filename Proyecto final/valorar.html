@@ -16,7 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!--OJO EL ULTIMO SLASH-->
 
     <!--JavaScript at end of body for optimized loading-->
-    <script defer type="text/javascript" src="js/materialize.min.js"></script>
+    <script defer type="text/javascript" src="js/materialize.js"></script>
+    <!-- <script defer type="text/javascript" src="js/materialize.min.js"></script> -->
+    <script type="text/javascript" src="js/scripts.js"></script>
 
   </head>
 <body>
@@ -61,9 +63,7 @@
 						<label for="autocomplete-input">Autocomplete</label>
           </div>
           <div class="col s10 offset-s1 m3 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
-            <a class="waves-effect waves-light btn-large blue darken-1" style="">Continuar</a>        
-
-
+            <a class="waves-effect waves-light btn-large blue darken-1" onclick="myScript()">Continuar</a>        
           </div>
 				</div>
       </div>
@@ -119,6 +119,21 @@
     $(document).ready(function(){
       $('.sidenav').sidenav();
     });
+
+      // jQuery para el Autocomplete
+
+    // $(document).ready(function(){
+    // $('input.autocomplete').autocomplete({
+    //   data: {
+    //     "doctor.nombre":null,
+    //     "Akkk":null,
+    //     "Apple": null,
+    //     "Microsoft": null,
+    //     "Google": 'https://placehold.it/250x250'
+    //   },
+    // });
+  // });
+
   </script>
 
 </body>
