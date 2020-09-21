@@ -3,37 +3,37 @@ Los médicos son uno de los principales objetos del proyecto.
 Tienen propiedades estátcas como nombre y lugares de atención y otras dinámicas que son las recomendaciones
 y puntajes que les dan los pacientes que fueron atendidos por ellos*/
 
-var doctor1 = {
-  nombre: "Dr. Lucas Gonzalez",
-  lugaresDeAtencion: ["Clínica 1", "Consultorio privado XX", "Hospital 1"], // Listado de lugares en donde atiende el médico
-  recomiendan: 38, // Cantidad de pacientes que pusieron que recomiendan al médico
-  noRecomiendan: 4, // Cantidad de pacientes que pusieron que no recomiendan al médico
-  puntajesPuntualidad: [4, 2, 3, 5], // Listado de puntajes que pacientes ponen a la puntualidad dél médico en sus visitas
-  promedioPuntualidad: 0, // Promedio de los puntajes de puntualidad
-  puntajesAmbiente: [3, 2, 5, 1],
-  promedioAmbiente: 0,
-  puntajesTrato: [4, 5, 3, 4],
-  promedioTrato: 0,
-  puntajesResultado: [4, 2, 3, 5],
-  promedioResultado: 0,
-  promedioTotal: 0, // Promedio de todos los puntajes que recibió el médico, a modo de puntaje 
+// Listado de doctores
+var doctores = []
+
+// Fx para agregar un doctor al listado de doctores
+function AgregarDoctorADoctores(doctor) {
+  doctores.push(doctor)
 }
 
-var doctor2 = {
-  nombre: "Dra. Irma Perez",
-  lugaresDeAtencion: ["Clínica 2", "Consultorio privado YY", "Hospital 2"],
-  recomiendan: 50,
-  noRecomiendan: 10,
-  puntajesPuntualidad: [1, 2, 2, 3],
-  promedioPuntualidad: 0,
-  puntajesAmbiente: [2, 4, 5, 1],
-  promedioAmbiente: 0,
-  puntajesTrato: [5, 5, 4, 4],
-  promedioTrato: 0,
-  puntajesResultado: [2, 2, 3, 4],
-  promedioResultado: 0,
-  promedioTotal: 0,
+// Consctructor de doctores
+function nuevoDoctor(nombre, lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion3) {
+  this.nombre = nombre,
+  this.lugaresDeAtencion = [lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion3] // Listado de lugares donde atiende
+  this.recomiendan = 0, // Cantidad de pacientes que pusieron que recomiendan al médico
+  this.noRecomiendan = 0, // Cantidad de pacientes que pusieron que no recomiendan al médico
+  this.puntajesPuntualidad = [], // Listado de puntajes que pacientes ponen a la puntualidad dél médico en sus visitas
+  this.promedioPuntualidad = 0, // Promedio de los puntajes de puntualidad
+  this.puntajesAmbiente = [],
+  this.promedioAmbiente = 0,
+  this.puntajesTrato = [],
+  this.promedioTrato = 0,
+  this.puntajesResultado = [],
+  this.promedioResultado = 0,
+  this.puntajesTotal = [], // Array que concatena todos los puntajes
+  this.promedioTotal = 0,  // Promedio de todos los puntajes que recibió el médico, a modo de puntaje general
+
+  AgregarDoctorADoctores(this)
 }
+
+// Doctores de ejemplo
+var doctor1 = new nuevoDoctor("Dr. Lucas Gonzalez", "Clínica 1", "Consultorio privado XX", "Hospital 1")
+var doctor2 = new nuevoDoctor("Dra. Irma Perez", "Clínica 2", "Consultorio privado YY", "Hospital 2")
 
 /*PACIENTES
 Los pacientes son la contracara de los médicos. Sus propiedades son datos básicos de la persona atendida*/
@@ -79,7 +79,7 @@ var visita2 = {
 
 /* Funciones */
 
-/* Constructora de visita: crea una nueva visita y luego asigna los puntajes al médico correspondiente*/
+/* Constructora de visita: crea una nueva visita, asigna los pts al médico y calcula los promedios*/
 function nuevaVisita(fecha, lugar, doctor, paciente, puntualidad, ambiente, trato, resultado, recomienda) {
   this.fecha = new Date(fecha),
   this.lugar = lugar,
@@ -108,42 +108,80 @@ function nuevaVisita(fecha, lugar, doctor, paciente, puntualidad, ambiente, trat
       break;
     case 0:
       doctor.noRecomiendan += 1;
-  } 
+  }
+  
+  promediar(doctor)
 }
 
 /* Para sacar el promedio de puntajes de un médico */
-function promediarTodo(Doctor) {
+function promediar(doctor) {
   var acum = 0;
-  for (let i = 0; i < Doctor.puntajesPuntualidad.length; i++) {
-    acum += Doctor.puntajesPuntualidad[i];    
+  for (let i = 0; i < doctor.puntajesPuntualidad.length; i++) {
+    acum += doctor.puntajesPuntualidad[i];    
   }
-  Doctor.promedioPuntualidad = acum / Doctor.puntajesPuntualidad.length   
+  doctor.promedioPuntualidad = acum / doctor.puntajesPuntualidad.length   
 
   var acum = 0;
-  for (let i = 0; i < Doctor.puntajesAmbiente.length; i++) {
-    acum += Doctor.puntajesAmbiente[i];    
+  for (let i = 0; i < doctor.puntajesAmbiente.length; i++) {
+    acum += doctor.puntajesAmbiente[i];    
   }
-  Doctor.promedioAmbiente = acum / Doctor.puntajesAmbiente.length
+  doctor.promedioAmbiente = acum / doctor.puntajesAmbiente.length
   
   var acum = 0;
-  for (let i = 0; i < Doctor.puntajesTrato.length; i++) {
-    acum += Doctor.puntajesTrato[i];    
+  for (let i = 0; i < doctor.puntajesTrato.length; i++) {
+    acum += doctor.puntajesTrato[i];    
   }
-  Doctor.promedioTrato = acum / Doctor.puntajesTrato.length
+  doctor.promedioTrato = acum / doctor.puntajesTrato.length
 
   var acum = 0;
-  for (let i = 0; i < Doctor.puntajesResultado.length; i++) {
-    acum += Doctor.puntajesResultado[i];    
+  for (let i = 0; i < doctor.puntajesResultado.length; i++) {
+    acum += doctor.puntajesResultado[i];    
   }
-  Doctor.promedioResultado = acum / Doctor.puntajesResultado.length;
+  doctor.promedioResultado = acum / doctor.puntajesResultado.length;
 
+  doctor.puntajesTotal = [...doctor.puntajesPuntualidad, ...doctor.puntajesAmbiente, ...doctor.puntajesTrato, ...doctor.puntajesResultado]
+  var acum = 0;
+  for (let i = 0; i < doctor.puntajesTotal.length; i++) {
+    acum += doctor.puntajesTotal[i];    
+  }
+  doctor.promedioTotal = acum / doctor.puntajesTotal.length;
 }
 
-/*Para mostrar los puntajes promediios actuales de un médico, para la sección Buscar.
-Aún no la pude hacer
-*/
+//Para mostrar los puntajes promediios actuales de un médico, para la sección Buscar.
+function verPuntajes(doctor) {
+  console.log(doctor.promedioPuntualidad)
+  console.log(doctor.promedioAmbiente)
+  console.log(doctor.promedioTrato)
+  console.log(doctor.promedioResultado)
+}
 
-/*Nuevo ingreso de visita a modo de ejemplo:
-var visita3 = new nuevaVisita ("2020,07,06", "xxx", doctor1, "paciene", 999,888,777,666,1)
-*/
+// Autocompletar con elementos de array
+document.addEventListener('DOMContentLoaded', function() {
+  function getWords(){
+    var options = {}
+    doctores.forEach(element => {
+      options[element.nombre] = null
+    })
+    return options
+  }
+  var elems = document.querySelectorAll('.autocomplete');
+  var instances = M.Autocomplete.init(elems, {data: getWords()});
+})
 
+// prueba sessionStorage
+function myScript(){
+  sessionStorage.setItem("AAAA", "yAAyy")
+  sessionStorage.setItem("aaAAAA", "yAAyy")
+}
+
+function botonBuscar() {
+
+  document.querySelector("#divisor").style.visibility = "visible"
+
+// var doctorElegido = document.querySelector("#autocomplete-input").value
+
+// verPuntajes(doctor1)
+ 
+
+
+}
