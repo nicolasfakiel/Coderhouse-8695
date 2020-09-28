@@ -7,7 +7,7 @@ y puntajes que les dan los pacientes que fueron atendidos por ellos*/
 var doctores = []
 
 // Fx para agregar un doctor al listado de doctores
-function AgregarDoctorADoctores(doctor) {
+function agregarDoctorADoctores(doctor) {
   doctores.push(doctor)
 }
 
@@ -15,25 +15,32 @@ function AgregarDoctorADoctores(doctor) {
 function nuevoDoctor(nombre, lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion3) {
   this.nombre = nombre,
   this.lugaresDeAtencion = [lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion3] // Listado de lugares donde atiende
-  this.recomiendan = 0, // Cantidad de pacientes que pusieron que recomiendan al médico
-  this.noRecomiendan = 0, // Cantidad de pacientes que pusieron que no recomiendan al médico
+  this.recomiendan = 20, // Cantidad de pacientes que pusieron que recomiendan al médico
+  this.noRecomiendan = 10, // Cantidad de pacientes que pusieron que no recomiendan al médico
   this.puntajesPuntualidad = [], // Listado de puntajes que pacientes ponen a la puntualidad dél médico en sus visitas
-  this.promedioPuntualidad = 0, // Promedio de los puntajes de puntualidad
+  this.promedioPuntualidad = 1, // Promedio de los puntajes de puntualidad
   this.puntajesAmbiente = [],
-  this.promedioAmbiente = 0,
+  this.promedioAmbiente = 2,
   this.puntajesTrato = [],
-  this.promedioTrato = 0,
+  this.promedioTrato = 3,
   this.puntajesResultado = [],
-  this.promedioResultado = 0,
+  this.promedioResultado = 4,
   this.puntajesTotal = [], // Array que concatena todos los puntajes
   this.promedioTotal = 0,  // Promedio de todos los puntajes que recibió el médico, a modo de puntaje general
 
-  AgregarDoctorADoctores(this)
+  agregarDoctorADoctores(this)
+
+  // this.agregarDoctorADoctores = function () {
+  //   doctores.push()
+    
+  // }
 }
 
 // Doctores de ejemplo
 var doctor1 = new nuevoDoctor("Dr. Lucas Gonzalez", "Clínica 1", "Consultorio privado XX", "Hospital 1")
 var doctor2 = new nuevoDoctor("Dra. Irma Perez", "Clínica 2", "Consultorio privado YY", "Hospital 2")
+var doctor3 = new nuevoDoctor("Dra. José Pekermann", "Clínica 2", "Consultorio privado YY", "Hospital 2")
+
 
 /*PACIENTES
 Los pacientes son la contracara de los médicos. Sus propiedades son datos básicos de la persona atendida*/
@@ -148,12 +155,12 @@ function promediar(doctor) {
 }
 
 //Para mostrar los puntajes promediios actuales de un médico, para la sección Buscar.
-function verPuntajes(doctor) {
-  console.log(doctor.promedioPuntualidad)
-  console.log(doctor.promedioAmbiente)
-  console.log(doctor.promedioTrato)
-  console.log(doctor.promedioResultado)
-}
+// function verPuntajes(doctor) {
+//   console.log(doctor.promedioPuntualidad)
+//   console.log(doctor.promedioAmbiente)
+//   console.log(doctor.promedioTrato)
+//   console.log(doctor.promedioResultado)
+// }
 
 // Autocompletar con elementos de array
 document.addEventListener('DOMContentLoaded', function() {
@@ -168,20 +175,300 @@ document.addEventListener('DOMContentLoaded', function() {
   var instances = M.Autocomplete.init(elems, {data: getWords()});
 })
 
-// prueba sessionStorage
-function myScript(){
-  sessionStorage.setItem("AAAA", "yAAyy")
-  sessionStorage.setItem("aaAAAA", "yAAyy")
+// Datepicker
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.datepicker');
+  var instances = M.Datepicker.init(elems, {autoClose: true});
+});
+
+
+
+// Select lugares de atención
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, cargarLugaresDeAtencion());
+  });
+
+function cargarLugaresDeAtencion() {
+  
+  doctor1.lugaresDeAtencion.forEach(element => {
+    
+    let select = document.querySelector('#seleccionLugar')
+    nuevaOpcion = document.createElement('option')
+
+    nuevaOpcion.setAttribute('value', doctor1.lugaresDeAtencion.indexOf(element)+1)
+    nuevaOpcion.textContent = element
+
+    select.appendChild(nuevaOpcion)
+
+  });
 }
 
-function botonBuscar() {
 
-  document.querySelector("#divisor").style.visibility = "visible"
 
-// var doctorElegido = document.querySelector("#autocomplete-input").value
 
-// verPuntajes(doctor1)
- 
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+// Agregar evento al botón del paso 1
+  const botonPaso1 = document.querySelector('#botonPaso1')
+
+  botonPaso1.addEventListener('click', function() {
+
+    var doctorElegido = document.querySelector("#autocomplete-input").value
+
+    if (doctorElegido ===''){
+      console.log("campo nombre de medico vacio")
+    }
+
+    else {
+      guardarSessionStorage("nombre", doctorElegido)
+      document.querySelector('#paso1').style.display='none'    
+      setTimeout(() => {
+        document.querySelector('#paso2').style.display='block'  
+      }, 500)
+
+    }
+  })
+
+// Agregar evento al botón del paso 2
+  const botonPaso2 = document.querySelector('#botonPaso2')
+
+  botonPaso2.addEventListener('click', function() {
+
+    var fechaElegida = document.querySelector(".datepicker").value
+
+    if (fechaElegida ===''){
+      console.log("campo fecha vacia")
+    }
+
+    else {
+      guardarSessionStorage("fecha", fechaElegida)
+      document.querySelector('#paso2').style.display='none'
+      document.querySelector('#paso3').style.display='block'
+    }
+  })
+
+// Agregar evento al botón del paso 3
+  const botonPaso3 = document.querySelector('#botonPaso3')
+
+  botonPaso3.addEventListener('click', function() {
+
+    var lugarElegido = document.querySelector("#seleccionLugar").value
+
+    if (lugarElegido ===''){
+      console.log("campo lugar vacio")
+    }
+
+    else {
+      guardarSessionStorage("lugar", lugarElegido)
+      document.querySelector('#paso3').style.display='none'
+      document.querySelector('#paso4').style.display='block'
+    }
+  })
+
+// Agregar evento al botón del paso 4
+  const botonPaso4 = document.querySelector('#botonPaso4')
+
+  botonPaso4.addEventListener('click', function() {
+
+    var puntualidadElegida = document.querySelector('#puntualidad span').textContent
+
+    if (puntualidadElegida ===''){
+      console.log("campo puntualidad vacia")
+    }
+
+    else {
+      guardarSessionStorage("puntualidad", puntualidadElegida)
+      document.querySelector('#paso4').style.display='none'
+      setTimeout(() => {
+        document.querySelector('#paso5').style.display='block'  
+      }, 500)    }
+  })
+
+  // Agregar evento al botón del paso 5
+  const botonPaso5 = document.querySelector('#botonPaso5')
+
+  botonPaso5.addEventListener('click', function() {
+
+    var tratoElegido = document.querySelector('#trato span').textContent
+
+    if (tratoElegido ===''){
+      console.log("campo puntualidad vacia")
+    }
+
+    else {
+      guardarSessionStorage("trato", tratoElegido)
+      document.querySelector('#paso5').style.display='none'
+      document.querySelector('#paso6').style.display='block'
+    }
+  })
+
+// Agregar evento al botón del paso 6
+  const botonPaso6 = document.querySelector('#botonPaso6')
+
+  botonPaso6.addEventListener('click', function() {
+
+    var ambienteElegido = document.querySelector('#ambiente span').textContent
+
+    if (ambienteElegido ===''){
+      console.log("campo ambiente vacio")
+    }
+
+    else {
+      guardarSessionStorage("ambiente", ambienteElegido)
+      document.querySelector('#paso6').style.display='none'
+      document.querySelector('#paso7').style.display='block'
+    }
+  })
+
+// Agregar evento al botón del paso 7
+  const botonPaso7 = document.querySelector('#botonPaso7')
+
+  botonPaso7.addEventListener('click', function() {
+
+    var resultadoElegido = document.querySelector('#resultado span').textContent
+
+    if (resultadoElegido ===''){
+      console.log("campo resultado vacio")
+    }
+
+    else {
+      guardarSessionStorage("resultado", resultadoElegido)
+      document.querySelector('#paso7').style.display='none'
+      document.querySelector('#paso8').style.display='block'
+    }
+  })
+
+// Agregar evento al botón del paso 8
+  const botonPaso8 = document.querySelector('#botonPaso8')
+
+  botonPaso8.addEventListener('click', function() {
+
+    var recomendacionElegida = document.querySelector('#seleccionRecomienda').value
+
+    if (recomendacionElegida ===''){
+      console.log("campo recomendacion vacia")
+    }
+
+    else {
+      guardarSessionStorage("recomendacion", recomendacionElegida)
+      document.querySelector('#paso8').style.display='none'
+      document.querySelector('#paso9').style.display='block'
+    }
+  })
+
+// Agregar evento al botón del paso 9
+  const botonPaso9 = document.querySelector('#botonPaso9')
+
+  botonPaso9.addEventListener('click', function() {
+
+    var comentarioElegido = document.querySelector('#textarea').value
+
+    if (comentarioElegido ===''){
+      console.log("campo comentario vacio")
+    }
+
+    else {
+      guardarSessionStorage("comentario", comentarioElegido)
+      document.querySelector('#paso9').style.display='none'
+      document.querySelector('#paso10').style.display='block'
+      llenarDatosPaso10()
+    }
+  })
+
+function llenarDatosPaso10() {
+
+  var nombre = document.createElement('span')
+  var dia = document.createElement('span')
+  var lugar = document.createElement('span')
+  var puntualidad = document.createElement('span')
+  var trato = document.createElement('span')
+  var ambiente = document.createElement('span')
+  var resultado = document.createElement('span')
+  var recomendacion = document.createElement('span')
+  var comentario = document.createElement('span')
+
+  var traerNombre = JSON.parse(sessionStorage.getItem('nombre'))
+  var traerDia = JSON.parse(sessionStorage.getItem('fecha'))
+  var traerLugar = JSON.parse(sessionStorage.getItem('lugar'))
+  var traerPuntualidad = JSON.parse(sessionStorage.getItem('puntualidad'))
+  var traerTrato = JSON.parse(sessionStorage.getItem('trato'))
+  var traerAmbiente = JSON.parse(sessionStorage.getItem('ambiente'))
+  var traerResultado = JSON.parse(sessionStorage.getItem('resultado'))
+  var traerRecomendacion = JSON.parse(sessionStorage.getItem('recomendacion'))
+  var traerComentario = JSON.parse(sessionStorage.getItem('comentario'))
+  
+  nombre.textContent = traerNombre
+  dia.textContent = traerDia
+  lugar.textContent = traerLugar
+  puntualidad.textContent = traerPuntualidad
+  trato.textContent = traerTrato
+  ambiente.textContent = traerAmbiente
+  resultado.textContent = traerResultado
+  recomendacion.textContent = traerRecomendacion
+  comentario.textContent = traerComentario
+
+  document.querySelector('#verNombre').appendChild(nombre)
+  document.querySelector('#verDia').appendChild(dia)
+  document.querySelector('#verLugar').appendChild(lugar)
+  document.querySelector('#verPuntualidad').appendChild(puntualidad)
+  document.querySelector('#verTrato').appendChild(trato)
+  document.querySelector('#verAmbiente').appendChild(ambiente)
+  document.querySelector('#verResultado').appendChild(resultado)
+  document.querySelector('#verRecomendacion').appendChild(recomendacion)
+  document.querySelector('#verComentario').appendChild(comentario)
+}
+
+})
+
+
+
+// Guardar en Session Storage
+function guardarSessionStorage(clave, valor) { 
+
+  var json = JSON.stringify(valor)
+  sessionStorage.setItem(clave,json)
+
+}
+
+
+// Mostrar info de médico con el botón buscar
+var doctorBuscado = document.getElementById("botonBuscar")
+
+doctorBuscado.addEventListener("click", funcBotonBuscar)
+  
+function funcBotonBuscar() {
+  var doctorElegido = document.querySelector("#autocomplete-input").value
+  
+  var pasarDoctorElegido = doctores.find(doctor => {
+  if (doctor.nombre == doctorElegido) {
+    return doctor
+  }
+  })
+
+verPuntajes(pasarDoctorElegido)
+}
+
+function verPuntajes(doctor) {
+
+  document.querySelector("h2").textContent = doctor.nombre
+  document.querySelector("#puntaje-total").textContent = doctor.promedioTotal
+  
+  let porcentajeRecomiendan = doctor.recomiendan * 100 / (doctor.recomiendan + doctor.noRecomiendan)
+  document.querySelector("#porcentaje").textContent = `${parseInt(porcentajeRecomiendan)}%`
+
+  console.log(doctor.promedioPuntualidad)
+  console.log(doctor.promedioAmbiente)
+  console.log(doctor.promedioTrato)
+  console.log(doctor.promedioResultado)
+
+  document.querySelector("#divisor").style.display = "block"
 
 
 }
+
+
+
