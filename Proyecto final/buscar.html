@@ -18,7 +18,7 @@
     <!--JavaScript at end of body for optimized loading-->
     <script defer type="text/javascript" src="js/materialize.js"></script>
     <!-- <script defer type="text/javascript" src="js/materialize.min.js"></script> -->
-    <script type="text/javascript" src="js/scripts.js"></script>
+    <script defer type="text/javascript" src="js/scripts.js"></script>
 
   </head>
 <body>
@@ -56,33 +56,33 @@
 				<p>¿Qué médico/a querés buscar?</p>
 				<div class="row">
 					<div class="input-field col s10 offset-s1 m10">
-						<i class="material-icons prefix">textsms</i>
+						<!-- <i class="material-icons prefix">textsms</i> -->
 						<input type="text" id="autocomplete-input" class="autocomplete">
-						<label for="autocomplete-input">Autocomplete</label>
+						<label for="autocomplete-input">Comenzá a escribir el nombre del médico/a</label>
           </div>
           <div class="col s10 offset-s1 m2 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
-            <a class="waves-effect waves-light btn-large blue darken-1" onclick="botonBuscar()">Continuar</a>        
+            <a id="botonBuscar" class="waves-effect waves-light btn-large blue darken-1"">Buscar</a>        
           </div>
 				</div>
       </div>
     </div>
     
-    <div id="divisor" style="visibility: hidden;">
+    <div id="divisor" style="display: none;">
     <div class="divider" ></div>
     
     <div class="row" style="background-color: #d9eaff;"> 
       <div class="col s12 center-align" style="padding: 1% 0 1% 0%">
-        <h2 style="display: inline; font-size: 3rem;">Dr. José Pekerman</h2>
+        <h2 style="display: inline; font-size: 3rem;"></h2>
       </div>   
     </div>
 
   <div class="row" style="background-color: #eff1f3c9;">
     <div class="col s12 m6 center-align push-l1">
-      <h3 style="display: inline; font-weight: 600">4.5  </h3><span>puntaje total</span>
+      <h3 id="puntaje-total" style="display: inline; font-weight: 600"></h3><span> puntaje total</span>
     </div>
     
     <div class="col s12 m6 center-align pull-l1">
-      <h3 style="display: inline; font-weight: 600">80%  </h3><span> lo recomiendan</span>
+      <h3 id="porcentaje" style="display: inline; font-weight: 600"></h3><span> lo recomiendan</span>
     </div>    
   </div>
   <br>

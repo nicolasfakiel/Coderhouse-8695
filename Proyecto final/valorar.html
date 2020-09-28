@@ -22,93 +22,276 @@
 
   </head>
 <body>
-    <nav class="blue darken-3">
-      <div class="nav-wrapper">
-        <a href="index.html" class="brand-logo hide-on-med-and-down" style="padding-left: 15px;">Logo1</a>
-        <a href="index.html" class="brand-logo hide-on-large-only">Logo2</a>
-
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="buscar.html">Buscá un Médico/a</a></li>
-          <li><a href="#">Valorá un Médico/a</a></li>
-          <li><a href="#">Nosotros</a></li>
-          <li><a href="#">Contacto</a></li>
-        </ul>
-      </div>
-    </nav>
-  
-    <ul class="sidenav blue accent-1" id="mobile-demo">
-      <li><a href="buscar.html" class="white-text">Buscá un Médico/a</a></li>
-      <li><a href="#" class="white-text">Valorá un Médico/a</a></li>
-      <li><a href="#" class="white-text">Nosotros</a></li>
-      <li><a href="#" class="white-text">Contacto</a></li>
-    </ul>
-
-  <div>
-
-    <div class="row">
-      <div class="col s12 center-align">
-        <h4>Valorá un Médico/a</h4>      </div>
+  <nav class="blue darken-3">
+    <div class="nav-wrapper">
+      <a href="index.html" class="brand-logo hide-on-med-and-down" style="padding-left: 15px;">Logo1</a>
+      <a href="index.html" class="brand-logo hide-on-large-only">Logo2</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="buscar.html">Buscá un Médico/a</a></li>
+        <li><a href="#">Valorá un Médico/a</a></li>
+        <li><a href="#">Nosotros</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
     </div>
+  </nav>
+  
+  <ul class="sidenav blue accent-1" id="mobile-demo">
+    <li><a href="buscar.html" class="white-text">Buscá un Médico/a</a></li>
+    <li><a href="#" class="white-text">Valorá un Médico/a</a></li>
+    <li><a href="#" class="white-text">Nosotros</a></li>
+    <li><a href="#" class="white-text">Contacto</a></li>
+  </ul>
 
-    <div class="row">
-      <div class="col s12 m8">
+<!-- Fin Nav Bar -->
+
+  <div class="row">
+    <div class="col s12 center-align">
+      <h4>Valorá un Médico/a</h4>
+    </div>
+  </div>
+
+  <div class="row"> <!-- Contiene ambos lados -->
+
+    <div class="col s12 m8"> <!-- Columna con todos los pasos -->
+      <div class="row" id="paso1"> <!-- Row paso 1: Nombre del médico -->
         <div class="container">
           <p>¿Cuál es el nombre del médico/a?</p>
         </div>
 				<div class="row">
-					<div class="input-field col s10 offset-s1 m7 offset-m1">
-						<i class="material-icons prefix">textsms</i>
+					<div class="input-field  container col s10 offset-s1 m6 offset-m1 l7 offset-l2">
+						<!-- <i class="material-icons prefix">textsms</i> -->
 						<input type="text" id="autocomplete-input" class="autocomplete">
-						<label for="autocomplete-input">Autocomplete</label>
+						<label for="autocomplete-input" value=' '>Comenzá a escribir el nombre del médico/a</label>
           </div>
-          <div class="col s10 offset-s1 m3 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
-            <a class="waves-effect waves-light btn-large blue darken-1" onclick="myScript()">Continuar</a>        
+          <div class="col s10 offset-s1 m5 l2 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" id="botonPaso1">Confirmar</a>        
           </div>
-				</div>
+        </div>
       </div>
+      <div class="row" id="paso2" style="display: none;"> <!-- Row paso 2: Día de la atención  -->
+        <div class="container">
+          <p>¿Cuál fue la fecha de la atención?</p>
+        </div>
+				<div class="row">
+					<div class="input-field  container col s10 offset-s1 m6 offset-m1 l7 offset-l2">
+            <input type="text" class="datepicker">
+          </div>
+          <div class="col s10 offset-s1 m5 l2 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" id="botonPaso2">Confirmar</a>        
+          </div>
+        </div>
+      </div>
+      <div class="row" id="paso3" style="display: none;"> <!-- Row paso 3 : Lugar de la atención-->
+        <div class="container">
+          <p>¿Dónde fue la atención?</p>
+        </div>
+				<div class="row">
+          <div class="input-field container col s10 offset-s1 m6 offset-m1 l7 offset-l2">
+            <select id="seleccionLugar">
+              <option value="" disabled selected>Elegí el lugar dónde te atendiste</option>
+              <!-- <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option> -->
+            </select>
+              <!-- <label>Elegí el lugar dónde te atendiste</label> -->
+          </div>
+          <div class="col s10 offset-s1 m5 l2 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" id="botonPaso3">Confirmar</a>        
+          </div>
+        </div>
+      </div>
+      <div class="row" id="paso4" style="display: none;"> <!-- Row paso 4: Puntualidad -->
+        <div class="container">
+          <p>¿Cómo calificarías la puntualidad del médico/a?</p>
+        </div>
+				<div class="row">
+					<div class="container col s10 offset-s1 m6 offset-m1 l7 offset-l2">
+            <form action="#">
+              <p class="range-field" id="puntualidad">
+                <input type="range" min="1" max="5" />
+              </p>
+            </form>
+          </div>
+          <div class="col s10 offset-s1 m5 l2 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" id="botonPaso4">Confirmar</a>        
+          </div>
+        </div>
+      </div>
+      <div class="row" id="paso5" style="display: none;"> <!-- Row paso 5: Trato -->
+        <div class="container">
+          <p>¿Cómo calificarías el trato del médico/a?</p>
+        </div>
+				<div class="row">
+					<div class="container col s10 offset-s1 m6 offset-m1 l7 offset-l2">
+            <form action="#">
+              <p class="range-field" id="trato">
+                <input type="range" min="1" max="5" />
+              </p>
+            </form>
+          </div>
+          <div class="col s10 offset-s1 m5 l2 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" id="botonPaso5">Confirmar</a>        
+          </div>
+        </div>
+      </div>
+      <div class="row" id="paso6" style="display: none;"> <!-- Row paso 6: Ambiente -->
+        <div class="container">
+          <p>¿Cómo calificarías el ambiente del consultorio?</p>
+        </div>
+				<div class="row">
+					<div class="container col s10 offset-s1 m6 offset-m1 l7 offset-l2">
+            <form action="#">
+              <p class="range-field" id="ambiente">
+                <input type="range" min="1" max="5" />
+              </p>
+            </form>
+          </div>
+          <div class="col s10 offset-s1 m5 l2 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" id="botonPaso6">Confirmar</a>        
+          </div>
+        </div>
+      </div>
+      <div class="row" id="paso7" style="display: none;"> <!-- Row paso 7: Resultado -->
+        <div class="container">
+          <p>¿Cómo calificarías el resultado del tratamiento que te dio médico/a?</p>
+        </div>
+				<div class="row">
+					<div class="container col s10 offset-s1 m6 offset-m1 l7 offset-l2">
+            <form action="#">
+              <p class="range-field" id="resultado">
+                <input type="range" min="1" max="5" />
+              </p>
+            </form>
+          </div>
+          <div class="col s10 offset-s1 m5 l2 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" id="botonPaso7">Confirmar</a>        
+          </div>
+        </div>
+      </div>
+      <div class="row" id="paso8" style="display: none;"> <!-- Row paso 8: Recomendación -->
+        <div class="container">
+          <p>¿Recomendás al médico/a?</p>
+        </div>
+				<div class="row">
+          <div class="input-field container col s10 offset-s1 m6 offset-m1 l7 offset-l2">
+            <select id="seleccionRecomienda">
+              <option value="" disabled selected>Si/No?</option>
+              <option value="1">Si</option>
+              <option value="0">No</option>
+            </select>
+              <!-- <label>Elegí el lugar dónde te atendiste</label> -->
+          </div>
+          <div class="col s10 offset-s1 m5 l2 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" id="botonPaso8">Confirmar</a>        
+          </div>
+        </div>
+      </div>      
+      <div class="row" id="paso9" style="display: none;"> <!-- Row paso 9: Comentario -->
+        <div class="container">
+          <p>Este espacio es para que dejes un comentario del médico/a?</p>
+        </div>
+				<div class="row"> 
+          <form class="col container col s10 offset-s1 m6 offset-m1 l7 offset-l2">
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="textarea" class="materialize-textarea"></textarea>
+                <label for="textarea1">Escribí acá</label>
+              </div>
+            </div>
+          </form>
+          <div class="col s10 offset-s1 m5 l2 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" id="botonPaso9">Confirmar</a>        
+          </div>
+        </div>
+      </div>
+      <div class="row" id="paso10" style="display: none;"> <!-- Row paso 10: Confirmación -->
+        <div class="container">
+          <p>Estás a punto de dejar la siguiente valoración</p>
+        </div>
+				<div class="row"> 
+          <div class="col container col s10 offset-s1 m10 offset-m1 l9 offset-l2">
+            <div class="row">
+              <div class="col s12 l6">
+                <ul class="collection">
+                  <li class="collection-item" id="verNombre">Nombre del médico: </li>
+                  <li class="collection-item" id="verDia">Día de la antención: </li>
+                  <li class="collection-item" id="verLugar">Lugar de la atención: </li>
+                  <li class="collection-item" id="verPuntualidad">Puntualidad: </li>
+                </ul>
+              </div>    
+              <div class="col s12 l6">
+                <ul class="collection">
+                  <li class="collection-item" id="verTrato">Trato: </li>
+                  <li class="collection-item" id="verAmbiente">Ambiente: </li>
+                  <li class="collection-item" id="verResultado">Resultado: </li>
+                  <li class="collection-item" id="verRecomendacion">Recomendación: </li>
+                </ul>
+              </div>
+              <div class="col s12">
+                <ul class="collection">
+                  <li class="collection-item" id="verComentario">Comentario: </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
 
+          <div class="col s12 center-align" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <a class="waves-effect waves-light btn-large blue darken-1" id="botonPaso9">Confirmar</a>        
+          </div>
+      </div> <!-- FIn paso 10 -->
+        
 
-      <div class="col s12 m4">
-				<ul>
-					<li>
-						<p style="font-weight: 600;font-size: large;">
-							1. Nombre del médico/a</p>
-              <p style="border-left-width: 3px; border-left-style: solid; border-color: black; margin-left: 10px; color:white;">A</p>
-            </li>
-					<li>
-						<p style="color:#b4b4b4; font-weight:600; font-size:large">2. Día de la atención</p>
-              <p style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">A</p>
-            </li>
-					<li>
-						<p style="color:#b4b4b4; font-weight:600; font-size:large">3. Lugar de la atención</p>
-            <p style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">A</p>
-            </li>
-					<li>
-            <p style="color:#b4b4b4; font-weight:600; font-size:large">4. Puntualidad</p>
-            <p style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">A</p>
-          </li>
-					<li>
-            <p style="color:#b4b4b4; font-weight:600; font-size:large">5. Trato</p>
-            <p style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">A</p>
-          </li>
-					<li>
-            <p style="color:#b4b4b4; font-weight:600; font-size:large">6. Ambiente</p>
-            <p style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">A</p>
-          </li>
-					<li>
-            <p style="color:#b4b4b4; font-weight:600; font-size:large">7. Resultado</p>
-            <p style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">A</p>
-          </li>
-          <li>
-            <p style="color:#b4b4b4; font-weight:600; font-size:large">8. Confirmación</p>
+    </div> <!-- FIn Columna con todos los pasos -->
+    
+
+    <div class="col s12 m4"> <!-- Lista de pasos1 -->
+      <ul>
+			  <li>
+					<p style="font-weight: 600;font-size: large;">1. Nombre del médico/a</p>
+          <p id="eleccionPaso1" style="border-left-width: 3px; border-left-style: solid; border-color: black; margin-left: 10px; color:white;">#</p>
+        </li>
+				<li>
+					<p style="color:#b4b4b4; font-weight:600; font-size:large">2. Día de la atención</p>
+          <p id="eleccionPaso2" style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">#</p>
+        </li>
+				<li>
+					<p style="color:#b4b4b4; font-weight:600; font-size:large">3. Lugar de la atención</p>
+          <p id="eleccionPaso3" style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">#</p>
+        </li>
+				<li>
+          <p style="color:#b4b4b4; font-weight:600; font-size:large">4. Puntualidad</p>
+          <p id="eleccionPaso4" style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">#</p>
+        </li>
+				<li>
+          <p style="color:#b4b4b4; font-weight:600; font-size:large">5. Trato</p>
+          <p id="eleccionPaso5" style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">#</p>
+        </li>
+				<li>
+          <p style="color:#b4b4b4; font-weight:600; font-size:large">6. Ambiente</p>
+          <p id="eleccionPaso6" style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">#</p>
+        </li>
+				<li>
+          <p style="color:#b4b4b4; font-weight:600; font-size:large">7. Resultado</p>
+          <p id="eleccionPaso7" style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">#</p>
+        </li>
+        <li>
+          <p style="color:#b4b4b4; font-weight:600; font-size:large">8. Recomendación</p>
+          <p id="eleccionPaso8" style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">#</p>
+        </li>
+        <li>
+          <p style="color:#b4b4b4; font-weight:600; font-size:large">9. Comentario</p>
+          <p id="eleccionPaso9" style="border-left-width: 3px; border-left-style: solid; border-color: #b4b4b4; margin-left: 10px; color:white;">#</p>
+        </li>
+        <li>
+          <p style="color:#b4b4b4; font-weight:600; font-size:large">10. Confirmación</p>
           </li>   
-          </li>
-				</ul>
-      </div>
+        </li>
+			</ul>
     </div>
-		
-  </div>  
+
+  </div>
 
 
   <!-- JQuerry -->
@@ -119,21 +302,7 @@
     $(document).ready(function(){
       $('.sidenav').sidenav();
     });
-
-      // jQuery para el Autocomplete
-
-    // $(document).ready(function(){
-    // $('input.autocomplete').autocomplete({
-    //   data: {
-    //     "doctor.nombre":null,
-    //     "Akkk":null,
-    //     "Apple": null,
-    //     "Microsoft": null,
-    //     "Google": 'https://placehold.it/250x250'
-    //   },
-    // });
-  // });
-
+        
   </script>
 
 </body>
