@@ -4,7 +4,10 @@ Tienen propiedades estátcas como nombre y lugares de atención y otras dinámic
 y puntajes que les dan los pacientes que fueron atendidos por ellos*/
 
 // Listado de doctores
-var doctores = []
+
+
+
+
 
 // Consctructor de doctores
 function nuevoDoctor(nombre, lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion3) {
@@ -22,6 +25,12 @@ function nuevoDoctor(nombre, lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion
   this.promedioResultado = 0,
   this.puntajesTotal = [], // Array que concatena todos los puntajes
   this.promedioTotal = 0,  // Promedio de todos los puntajes que recibió el médico, a modo de puntaje general
+  this.comentarios = []
+  // this.comentarios = {
+  //   fechaComentario = [],
+  //   textoComentario = []
+  // }
+    
 
   this.agregarDoctorADoctores = function () { // Método para agregar el doctor al listado de doctores
     doctores.push(this)
@@ -29,10 +38,96 @@ function nuevoDoctor(nombre, lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion
 }
 
 // Doctores de ejemplo
+
+// var doctores = [
+//   {
+//     nombre: "Dr. Lucas Dalario",
+//     lugaresDeAtencion: ["Consultorio Dalario", "Clínica Pompa", "Hospital Fernández"],
+//   },{
+//     nombre: "Dr. Matías Ramirez",
+//     lugaresDeAtencion: ["Consultorio Ramirez", "Clínica Guertillo", "Hospital Gutierrez"],
+//   },{
+//     nombre: "Dr. Ignacio Martini",
+//     lugaresDeAtencion: ["Consultorio Martini", "Clínica Mabalar", "Hospital Alemán"],
+//   },{
+//   nombre: "Dr. Esteban Pecosa",
+//   lugaresDeAtencion: ["Consultorio Pecosa", "Clínica Tirso", "Hospital Italiano"],
+//   },{
+//   nombre: "Dr. Rafael Parsero",
+//   lugaresDeAtencion: ["Consultorio Parsero", "Clínica Soria", "Hospital Británico"],
+//   },{
+//   nombre: "Dr. Enzo Franco",
+//   lugaresDeAtencion: ["Consultorio Franco", "Clínica Jah", "Hospital de Niños"],
+//   },{
+//   nombre: "Dr. Franco Manotas",
+//   lugaresDeAtencion: ["Consultorio Manotas", "Clínica Ferona", "Hospital Fernández"],
+//   },{
+//   nombre: "Dr. Marcelo Padrenuestro",
+//   lugaresDeAtencion: ["Consultorio Padrenuestro", "Clínica Carnal", "Hospital Gutierrez"],
+//   },{
+//   nombre: "Dr. Juan Colovich",
+//   lugaresDeAtencion: ["Consultorio Colovich", "Clínica del Señor", "Hospital Alemán"],
+//   },{
+//   nombre: "Dr. Pedro Tor", 
+//   lugaresDeAtencion: ["Consultorio Tor", "Clínica El Arco", "Hospital Italiano"],
+//   },{
+//   nombre: "Dra. Jazmín Stuart", 
+//   lugaresDeAtencion: ["Consultorio Stuart", "Hospital Británico"],
+//   },{
+//   nombre: "Dra. Daniela Di Benedetto", 
+//   lugaresDeAtencion: ["Consultorio Di Benedetto", "Clínica Dandi", "Hospital de Niños"],
+//   },{
+//   nombre: "Dra. Paula Perez", 
+//   lugaresDeAtencion: ["Consultorio Perez", "Clínica Especial", "Hospital Fernández"],
+//   },{
+//   nombre: "Dra. Romina Broski", 
+//   lugaresDeAtencion: ["Consultorio Broski", "Clínica Zapata", "Hospital Gutierrez"],
+//   },{
+//   nombre: "Dra. Martina Gallardo", 
+//   lugaresDeAtencion: ["Consultorio Gallardo", "Clínica Tres a Uno", "Hospital Alemán"],
+//   },{
+//   nombre: "Dra. Laura Suarez", 
+//   lugaresDeAtencion: ["Consultorio Suarez", "Clínica Ex", "Hospital Italiano"],
+//   },{
+//   nombre: "Dra. Irma Borre", 
+//   lugaresDeAtencion: ["Consultorio Borre", "Clínica Monumental", "Hospital Británico"],
+//   },{
+//   nombre: "Dra. Nora Armani", 
+//   lugaresDeAtencion: ["Consultorio Armani", "Clínica La Banda", "Hospital de Niños"],
+//   },{
+//   nombre: "Dra. Hilda Quintero", 
+//   lugaresDeAtencion: ["Consultorio Quintero", "Clínica Madrid", "Hospital Fernández"],
+//   },{
+//   nombre: "Dra. Josefina Quarta", 
+//   lugaresDeAtencion: ["Consultorio Quarta", "Clínica Papaya", "Hospital Gutierrez"],
+//   }] 
+
+
 var doctor1 = new nuevoDoctor("Daniela", "Clínica 1", "Consultorio privado XX", "Hospital 1")
-doctor1.agregarDoctorADoctores()
+// doctor1.agregarDoctorADoctores()
+// // doctor1.puntajesPuntualidad.push(4)
+// // doctor1.puntajesTrato.push(5)
+// // doctor1.puntajesAmbiente.push(5)
+// // doctor1.puntajesResultado.push(4)
+// // doctor1.recomiendan = 1
+// // doctor1.noRecomiendan = 1
+
 var doctor2 = new nuevoDoctor("Matias", "Clínica 2", "Consultorio privado YY", "Hospital 2")
-doctor2.agregarDoctorADoctores()
+// doctor2.agregarDoctorADoctores()
+
+var doctor3 = new nuevoDoctor("Mauro", "Clínica 3", "Consultorio privado WW", "Hospital 3")
+// doctor3.agregarDoctorADoctores()
+
+if (localStorage.doctores) {
+  var doctores = JSON.parse(localStorage.doctores)
+}
+else {
+  var doctores = [doctor1, doctor2, doctor3]
+}
+
+// if (localStorage.doctores) {
+//   doctores = JSON.parse(localStorage.doctores)
+// }
 
 /*VISITAS
 Las visitas son los objetos que completan a los doctores.
@@ -40,10 +135,12 @@ Tienen un lugar, una fecha, un médico y todos los puntajes que el paciente le p
 Las visitar cuentan con constructor porque es lo que el usuario ingresa en la plataforma*/
 
 // Listado de visitas
-var visitas = []
+// var visitas = []
+var visitas = localStorage.visitas ? JSON.parse(localStorage.visitas) : []
+
 
 // Constructor de visitas (crea una nueva visita, asigna los pts al médico y calcula los promedios)
-function nuevaVisita(fecha, lugar, doctor, puntualidad, ambiente, trato, resultado, recomendacion) {
+function nuevaVisita(fecha, lugar, doctor, puntualidad, ambiente, trato, resultado, recomendacion, comentario) {
   this.fecha = fecha,
   this.lugar = lugar,
   this.doctor = doctor,
@@ -59,24 +156,15 @@ function nuevaVisita(fecha, lugar, doctor, puntualidad, ambiente, trato, resulta
       this.recomiendan = true
       break;
   }
+  this.comentario = comentario,
 
   this.agregarVisitaAVisitas = function () { // Método para agregar la visita al listado de visitas
     visitas.push(this)
   }
-
-// Las líneas 69 a 72 se usaban para agregar  los puntajes al doctor, se cambiaron por la función agregarPuntajes
-  // doctor.puntajesPuntualidad.push(puntualidad)
-  // doctor.puntajesAmbiente.push(ambiente)
-  // doctor.puntajesTrato.push(trato)
-  // doctor.puntajesResultado.push(resultado)
-    
-  agregarPuntajes(puntualidad, trato, ambiente, resultado, recomendacion, doctor)
-  
-  promediar(doctor)
 }
 
 // Función para agregar puntajes de una visita al doctor correspondiente
-function agregarPuntajes(ptsPuntualidad, ptsTrato, ptsAmbiente, ptsResultado, recomienda, doctorEnCuestion) {
+function agregarPuntajes(ptsPuntualidad, ptsTrato, ptsAmbiente, ptsResultado, recomienda, doctorEnCuestion, dia, comentario) {
   doctorEnCuestion.puntajesPuntualidad.push(ptsPuntualidad)
   doctorEnCuestion.puntajesTrato.push(ptsTrato)
   doctorEnCuestion.puntajesAmbiente.push(ptsAmbiente)
@@ -89,6 +177,7 @@ function agregarPuntajes(ptsPuntualidad, ptsTrato, ptsAmbiente, ptsResultado, re
       doctorEnCuestion.recomiendan += 1
       break;
   }
+  doctorEnCuestion.comentarios.push({fechaVisita: dia, comentario: comentario})
 }
 
 // Función para sacar el promedio de puntajes de un médico
@@ -128,8 +217,13 @@ function promediar(doctor) {
 
 /* ======== Inicio funciones para la página Valorar ======== */
 
-// Inicializa el Autocompletar y le trae los nombres del listado de doctores
+// DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
+
+  // Inicializa el Autocompletar y le trae los nombres del listado de doctores  
+  var elems = document.querySelectorAll('.autocomplete');
+  var instances = M.Autocomplete.init(elems, {data: pasarDocsAlAutocomplete()});
+  
   function pasarDocsAlAutocomplete(){
     var options = {}
     doctores.forEach(element => {
@@ -138,36 +232,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // console.log(options)
     return options
   }
-  var elems = document.querySelectorAll('.autocomplete');
-  var instances = M.Autocomplete.init(elems, {data: pasarDocsAlAutocomplete()});
-})
 
 // Inicializa el Datepicker
-document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.datepicker');
   var instances = M.Datepicker.init(elems, {autoClose: true});
-});
 
+  
 // Inicializa el Select con lugares de atención (aún hardcodeado)
-document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('select');
   var instances = M.FormSelect.init(elems, cargarLugaresDeAtencion());
-});
-
-function cargarLugaresDeAtencion() {
   
-  doctor1.lugaresDeAtencion.forEach(element => {
+  function cargarLugaresDeAtencion() {
     
-    let select = document.querySelector('#seleccionLugar')
-    nuevaOpcion = document.createElement('option')
+    doctores[0].lugaresDeAtencion.forEach(element => {
+      
+      let select = document.querySelector('#seleccionLugar')
+      nuevaOpcion = document.createElement('option')
+      
+      nuevaOpcion.setAttribute('value', doctores[0].lugaresDeAtencion.indexOf(element)+1)
+      nuevaOpcion.textContent = element
+      
+      select.appendChild(nuevaOpcion)
+      
+    });
+  }
+  
+})
 
-    nuevaOpcion.setAttribute('value', doctor1.lugaresDeAtencion.indexOf(element)+1)
-    nuevaOpcion.textContent = element
-
-    select.appendChild(nuevaOpcion)
-
-  });
-}
 
 // Guarda en Session Storage lo que va a ir completando el usuario
 function guardarSessionStorage(clave, valor) { 
@@ -188,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const botonPaso7 = document.querySelector('#botonPaso7')
   const botonPaso8 = document.querySelector('#botonPaso8')
   const botonPaso9 = document.querySelector('#botonPaso9')
+  // const botonPaso10 = document.querySelector('#botonPaso10')
 
   // Agregar evento al botón del paso 1
   botonPaso1.addEventListener('click', function() {
@@ -328,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     else {
       guardarSessionStorage("comentario", comentarioElegido)
-      document.querySelector('#paso9').style.display='none'
+      document.querySelector('#paso9').style.display='block'
       document.querySelector('#paso10').style.display='block'
       llenarDatosPaso10()
     }
@@ -336,20 +428,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
 })
 
-  // Luego de completar los pasos muestra el resumen
-  function llenarDatosPaso10() {
-    
-    var traerNombre = JSON.parse(sessionStorage.getItem('nombre'))
-    var traerDia = JSON.parse(sessionStorage.getItem('fecha'))
-    var traerLugar = JSON.parse(sessionStorage.getItem('lugar'))
-    var traerPuntualidad = parseInt(JSON.parse(sessionStorage.getItem('puntualidad')))
-    var traerTrato = parseInt(JSON.parse(sessionStorage.getItem('trato')))
-    var traerAmbiente = parseInt(JSON.parse(sessionStorage.getItem('ambiente')))
-    var traerResultado = parseInt(JSON.parse(sessionStorage.getItem('resultado')))
-    var traerRecomendacion = parseInt(JSON.parse(sessionStorage.getItem('recomendacion')))
-    var traerComentario = JSON.parse(sessionStorage.getItem('comentario'))
+// Variables con la info que viene de Session Storage de los 9 pasos
+var traerNombre
+var traerDia
+var traerLugar
+var traerPuntualidad
+var traerTrato
+var traerAmbiente
+var traerResultado
+var traerRecomendacion
+var traerComentario
+
+// Función que luego de completar los 9 pasos muestra el resumen
+function llenarDatosPaso10() {
+  traerNombre = JSON.parse(sessionStorage.getItem('nombre'))
+  traerDia = JSON.parse(sessionStorage.getItem('fecha'))
+  traerLugar = JSON.parse(sessionStorage.getItem('lugar'))
+  traerPuntualidad = parseInt(JSON.parse(sessionStorage.getItem('puntualidad')))
+  traerTrato = parseInt(JSON.parse(sessionStorage.getItem('trato')))
+  traerAmbiente = parseInt(JSON.parse(sessionStorage.getItem('ambiente')))
+  traerResultado = parseInt(JSON.parse(sessionStorage.getItem('resultado')))
+  traerRecomendacion = parseInt(JSON.parse(sessionStorage.getItem('recomendacion')))
+  traerComentario = JSON.parse(sessionStorage.getItem('comentario'))
   
-    
     document.querySelector('#verNombre').textContent = traerNombre
     document.querySelector('#verDia').textContent = traerDia
     document.querySelector('#verLugar').textContent = traerLugar
@@ -359,29 +460,31 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#verResultado').textContent = traerResultado
     document.querySelector('#verRecomendacion').textContent = traerRecomendacion
     document.querySelector('#verComentario').textContent = traerComentario
+}
 
-    
-    // Agregar evento al botón del paso 10
-    const botonPaso10 = document.querySelector('#botonPaso10')
+// Agregar evento al botón del paso 10
+botonPaso10.addEventListener('click', function() {
 
-    botonPaso10.addEventListener('click', function() {
+  var doctorDeLaVisita = doctores.find (doctor => doctor.nombre == traerNombre)
 
-      var visita = new nuevaVisita(traerDia, traerLugar, doctorDeLaVisita, traerPuntualidad, traerAmbiente, traerTrato, traerResultado, traerRecomendacion)
-      visita.agregarVisitaAVisitas()
-      // sessionStorage.clear()
-      document.querySelector('#paso10').style.display='none'    
-      document.querySelector('#paso1').style.display='block'
+  var visita = new nuevaVisita(traerDia, traerLugar, doctorDeLaVisita, traerPuntualidad, traerAmbiente, traerTrato, traerResultado, traerRecomendacion, traerComentario)
+      
+  visita.agregarVisitaAVisitas()
+  agregarPuntajes(traerPuntualidad, traerTrato, traerAmbiente, traerResultado, traerRecomendacion, doctorDeLaVisita, traerDia, traerComentario)
+  promediar(doctorDeLaVisita)
 
-    })
-    
-    var doctorDeLaVisita = doctores.find (doctor => doctor.nombre == traerNombre
-    )
+  // sessionStorage.clear()
+  document.querySelector('#paso10').style.display='none'    
+  document.querySelector('#paso1').style.display='block'
+  console.log("listo")
+  // window.location.href = "index.html"
+  
+  localStorage.setItem('doctores', JSON.stringify(doctores))
+  
+  localStorage.setItem('visitas', JSON.stringify(visitas))
 
-  }
+  
 
+  
 
-
-
-
-
-
+})
