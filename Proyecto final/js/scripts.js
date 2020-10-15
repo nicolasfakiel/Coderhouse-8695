@@ -1,15 +1,27 @@
 /*DOCTORES
-Los médicos son uno de los principales objetos del proyecto.
+Los doctores son uno de los principales objetos del proyecto.
 Tienen propiedades estátcas como nombre y lugares de atención y otras dinámicas que son las recomendaciones
 y puntajes que les dan los pacientes que fueron atendidos por ellos*/
 
 // Listado de doctores
+var doctores = []
 
+// Cargar los doctores al inicio
+if (localStorage.doctores) {
+  var doctores = JSON.parse(localStorage.doctores)
+} else {
+  $.ajax({
+    url: 'js/doctores.json',
+    
+    success: function (datosDoctores) {
+      datosDoctores.forEach(element => {
+        agregarDoctorADoctores(element)
+      });
+    }
+  })
+}
 
-
-
-
-// Consctructor de doctores
+// Consctructor de doctores (no se usa)
 function nuevoDoctor(nombre, lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion3) {
   this.nombre = nombre,
   this.lugaresDeAtencion = [lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion3] // Listado de lugares donde atiende
@@ -25,117 +37,24 @@ function nuevoDoctor(nombre, lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion
   this.promedioResultado = 0,
   this.puntajesTotal = [], // Array que concatena todos los puntajes
   this.promedioTotal = 0,  // Promedio de todos los puntajes que recibió el médico, a modo de puntaje general
-  this.comentarios = []
-  // this.comentarios = {
-  //   fechaComentario = [],
-  //   textoComentario = []
-  // }
-    
+  this.comentarios = [] 
 
   this.agregarDoctorADoctores = function () { // Método para agregar el doctor al listado de doctores
     doctores.push(this)
   }  
 }
 
-// Doctores de ejemplo
-
-// var doctores = [
-//   {
-//     nombre: "Dr. Lucas Dalario",
-//     lugaresDeAtencion: ["Consultorio Dalario", "Clínica Pompa", "Hospital Fernández"],
-//   },{
-//     nombre: "Dr. Matías Ramirez",
-//     lugaresDeAtencion: ["Consultorio Ramirez", "Clínica Guertillo", "Hospital Gutierrez"],
-//   },{
-//     nombre: "Dr. Ignacio Martini",
-//     lugaresDeAtencion: ["Consultorio Martini", "Clínica Mabalar", "Hospital Alemán"],
-//   },{
-//   nombre: "Dr. Esteban Pecosa",
-//   lugaresDeAtencion: ["Consultorio Pecosa", "Clínica Tirso", "Hospital Italiano"],
-//   },{
-//   nombre: "Dr. Rafael Parsero",
-//   lugaresDeAtencion: ["Consultorio Parsero", "Clínica Soria", "Hospital Británico"],
-//   },{
-//   nombre: "Dr. Enzo Franco",
-//   lugaresDeAtencion: ["Consultorio Franco", "Clínica Jah", "Hospital de Niños"],
-//   },{
-//   nombre: "Dr. Franco Manotas",
-//   lugaresDeAtencion: ["Consultorio Manotas", "Clínica Ferona", "Hospital Fernández"],
-//   },{
-//   nombre: "Dr. Marcelo Padrenuestro",
-//   lugaresDeAtencion: ["Consultorio Padrenuestro", "Clínica Carnal", "Hospital Gutierrez"],
-//   },{
-//   nombre: "Dr. Juan Colovich",
-//   lugaresDeAtencion: ["Consultorio Colovich", "Clínica del Señor", "Hospital Alemán"],
-//   },{
-//   nombre: "Dr. Pedro Tor", 
-//   lugaresDeAtencion: ["Consultorio Tor", "Clínica El Arco", "Hospital Italiano"],
-//   },{
-//   nombre: "Dra. Jazmín Stuart", 
-//   lugaresDeAtencion: ["Consultorio Stuart", "Hospital Británico"],
-//   },{
-//   nombre: "Dra. Daniela Di Benedetto", 
-//   lugaresDeAtencion: ["Consultorio Di Benedetto", "Clínica Dandi", "Hospital de Niños"],
-//   },{
-//   nombre: "Dra. Paula Perez", 
-//   lugaresDeAtencion: ["Consultorio Perez", "Clínica Especial", "Hospital Fernández"],
-//   },{
-//   nombre: "Dra. Romina Broski", 
-//   lugaresDeAtencion: ["Consultorio Broski", "Clínica Zapata", "Hospital Gutierrez"],
-//   },{
-//   nombre: "Dra. Martina Gallardo", 
-//   lugaresDeAtencion: ["Consultorio Gallardo", "Clínica Tres a Uno", "Hospital Alemán"],
-//   },{
-//   nombre: "Dra. Laura Suarez", 
-//   lugaresDeAtencion: ["Consultorio Suarez", "Clínica Ex", "Hospital Italiano"],
-//   },{
-//   nombre: "Dra. Irma Borre", 
-//   lugaresDeAtencion: ["Consultorio Borre", "Clínica Monumental", "Hospital Británico"],
-//   },{
-//   nombre: "Dra. Nora Armani", 
-//   lugaresDeAtencion: ["Consultorio Armani", "Clínica La Banda", "Hospital de Niños"],
-//   },{
-//   nombre: "Dra. Hilda Quintero", 
-//   lugaresDeAtencion: ["Consultorio Quintero", "Clínica Madrid", "Hospital Fernández"],
-//   },{
-//   nombre: "Dra. Josefina Quarta", 
-//   lugaresDeAtencion: ["Consultorio Quarta", "Clínica Papaya", "Hospital Gutierrez"],
-//   }] 
-
-
-var doctor1 = new nuevoDoctor("Daniela", "Clínica 1", "Consultorio privado XX", "Hospital 1")
-// doctor1.agregarDoctorADoctores()
-// // doctor1.puntajesPuntualidad.push(4)
-// // doctor1.puntajesTrato.push(5)
-// // doctor1.puntajesAmbiente.push(5)
-// // doctor1.puntajesResultado.push(4)
-// // doctor1.recomiendan = 1
-// // doctor1.noRecomiendan = 1
-
-var doctor2 = new nuevoDoctor("Matias", "Clínica 2", "Consultorio privado YY", "Hospital 2")
-// doctor2.agregarDoctorADoctores()
-
-var doctor3 = new nuevoDoctor("Mauro", "Clínica 3", "Consultorio privado WW", "Hospital 3")
-// doctor3.agregarDoctorADoctores()
-
-if (localStorage.doctores) {
-  var doctores = JSON.parse(localStorage.doctores)
+// Función para agregar los doctores al Array de doctores
+function agregarDoctorADoctores(doc) {
+  doctores.push(doc)  
 }
-else {
-  var doctores = [doctor1, doctor2, doctor3]
-}
-
-// if (localStorage.doctores) {
-//   doctores = JSON.parse(localStorage.doctores)
-// }
 
 /*VISITAS
 Las visitas son los objetos que completan a los doctores.
-Tienen un lugar, una fecha, un médico y todos los puntajes que el paciente le pone al doctor.
-Las visitar cuentan con constructor porque es lo que el usuario ingresa en la plataforma*/
+Tienen un lugar, una fecha, un doctor asociado y todos los puntajes que el paciente le pone al doctor.
+Las visitas cuentan con constructor porque es lo que el usuario ingresa en la plataforma*/
 
 // Listado de visitas
-// var visitas = []
 var visitas = localStorage.visitas ? JSON.parse(localStorage.visitas) : []
 
 
@@ -148,14 +67,11 @@ function nuevaVisita(fecha, lugar, doctor, puntualidad, ambiente, trato, resulta
   this.puntajeAmbiente = ambiente,
   this.puntajeTrato = trato,
   this.puntajeResultado = resultado;
-  switch (recomendacion) {
-    case 0:
-      this.recomendacion = false
-      break;
-    case 1:
-      this.recomiendan = true
-      break;
-  }
+  if (recomendacion == "Si") {
+    this.recomendacion = true
+  } else {
+    this.recomiendan = false
+  }  
   this.comentario = comentario,
 
   this.agregarVisitaAVisitas = function () { // Método para agregar la visita al listado de visitas
@@ -169,13 +85,10 @@ function agregarPuntajes(ptsPuntualidad, ptsTrato, ptsAmbiente, ptsResultado, re
   doctorEnCuestion.puntajesTrato.push(ptsTrato)
   doctorEnCuestion.puntajesAmbiente.push(ptsAmbiente)
   doctorEnCuestion.puntajesResultado.push(ptsResultado)
-  switch (recomienda) {
-    case 0:
-      doctorEnCuestion.noRecomiendan += 1
-      break;
-    case 1:
-      doctorEnCuestion.recomiendan += 1
-      break;
+  if (recomienda == "Si") {
+    doctorEnCuestion.recomiendan += 1
+  } else {
+    doctorEnCuestion.noRecomiendan += 1   
   }
   doctorEnCuestion.comentarios.push({fechaVisita: dia, comentario: comentario})
 }
@@ -215,55 +128,91 @@ function promediar(doctor) {
   doctor.promedioTotal = acum / doctor.puntajesTotal.length;
 }
 
-/* ======== Inicio funciones para la página Valorar ======== */
 
-// DOM Content Loaded
-document.addEventListener('DOMContentLoaded', function() {
+/* =============== */
 
-  // Inicializa el Autocompletar y le trae los nombres del listado de doctores  
-  var elems = document.querySelectorAll('.autocomplete');
-  var instances = M.Autocomplete.init(elems, {data: pasarDocsAlAutocomplete()});
-  
-  function pasarDocsAlAutocomplete(){
-    var options = {}
-    doctores.forEach(element => {
-      options[element.nombre] = null
-    })
-    // console.log(options)
-    return options
-  }
+// Inicializar el Autocomplete
+$(document).ready(function(){
+  $('input.autocomplete').autocomplete({
+    data: pasarDocsAlAutocomplete(),
+  });
+});
 
-// Inicializa el Datepicker
+// Rellenar el Autocomplete con los datos de los doctores
+function pasarDocsAlAutocomplete(){
+  var options = {}
+  doctores.forEach(element => {
+    options[element.nombre] = null
+  })
+  // console.log(options)
+  return options
+}   
+
+// Inicializar Select de lugares de atención de los doctores
+function iniciarSelect() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, cargarLugaresDeAtencion(JSON.parse(sessionStorage.getItem('nombre'))))
+}
+
+// Rellear Select con los lugares de atención correspondientes
+function cargarLugaresDeAtencion(doctorElegidoPaso1) {
+
+  var doctorElegido = doctores.find (doctor => doctor.nombre == doctorElegidoPaso1)
+    
+  doctorElegido.lugaresDeAtencion.forEach(element => {
+    
+    let select = document.querySelector('#seleccionLugar')
+    nuevaOpcion = document.createElement('option')
+    
+    nuevaOpcion.setAttribute('value', doctores[0].lugaresDeAtencion.indexOf(element)+1)
+    nuevaOpcion.textContent = element
+    
+    select.appendChild(nuevaOpcion)
+    
+  })
+}
+
+// Inicializar el Datepicker
+function iniciarDatepicker() {
   var elems = document.querySelectorAll('.datepicker');
   var instances = M.Datepicker.init(elems, {autoClose: true});
-
-  
-// Inicializa el Select con lugares de atención (aún hardcodeado)
-  var elems = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(elems, cargarLugaresDeAtencion());
-  
-  function cargarLugaresDeAtencion() {
-    
-    doctores[0].lugaresDeAtencion.forEach(element => {
-      
-      let select = document.querySelector('#seleccionLugar')
-      nuevaOpcion = document.createElement('option')
-      
-      nuevaOpcion.setAttribute('value', doctores[0].lugaresDeAtencion.indexOf(element)+1)
-      nuevaOpcion.textContent = element
-      
-      select.appendChild(nuevaOpcion)
-      
-    });
-  }
-  
-})
+}
 
 
-// Guarda en Session Storage lo que va a ir completando el usuario
+// Guarda en Session Storage la valoración que va completando el usuario
 function guardarSessionStorage(clave, valor) { 
   var json = JSON.stringify(valor)
   sessionStorage.setItem(clave,json)
+}
+
+// Avanzar de paso en la valoración
+function siguientePaso (nombreDelCampoSS, valorDelCampoSS, pasoEnElListado, campoEnElListado, pasoActual, pasoSiguiente) {
+  
+  guardarSessionStorage(nombreDelCampoSS, valorDelCampoSS)
+  $(pasoEnElListado).css('color','black')
+
+  if (isNaN(parseInt(valorDelCampoSS)) == false){
+    if (valorDelCampoSS > 1) {
+      $(campoEnElListado).text(valorDelCampoSS + " puntos")
+    }
+    else if (valorDelCampoSS = 1) {
+      $(campoEnElListado).text(valorDelCampoSS + " punto") 
+    }
+
+  } else if (pasoEnElListado == '#listadoPaso9') {
+    if (valorDelCampoSS == "Si") {
+      $(campoEnElListado).text("Recomendado")
+    } else {
+      $(campoEnElListado).text("No recomendado")
+    }
+
+  } else {
+    $(campoEnElListado).text(valorDelCampoSS)
+  }
+
+  $(campoEnElListado).append(`<i class="material-icons right">edit</i>`)
+  document.querySelector(pasoActual).style.display='none'    
+  document.querySelector(pasoSiguiente).style.display='block'
 }
 
 // Eventos a los botones de los 10 pasos en Valorar:
@@ -279,21 +228,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const botonPaso7 = document.querySelector('#botonPaso7')
   const botonPaso8 = document.querySelector('#botonPaso8')
   const botonPaso9 = document.querySelector('#botonPaso9')
-  // const botonPaso10 = document.querySelector('#botonPaso10')
 
   // Agregar evento al botón del paso 1
   botonPaso1.addEventListener('click', function() {
 
     var doctorElegido = document.querySelector("#autocomplete-input").value
 
-    if (doctorElegido ===''){
-      console.log("campo nombre de medico vacio")
-    }
-
-    else {
-      guardarSessionStorage("nombre", doctorElegido)
-      document.querySelector('#paso1').style.display='none'    
-      document.querySelector('#paso2').style.display='block'
+    if (doctorElegido !==''){
+      iniciarDatepicker()
+      siguientePaso("nombre", doctorElegido, "#listadoPaso2", "#eleccionPaso1", "#paso1", "#paso2")
     }
   })
 
@@ -302,30 +245,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var fechaElegida = document.querySelector(".datepicker").value
 
-    if (fechaElegida ===''){
-      console.log("campo fecha vacia")
-    }
-
-    else {
-      guardarSessionStorage("fecha", fechaElegida)
-      document.querySelector('#paso2').style.display='none'
-      document.querySelector('#paso3').style.display='block'
+    if (fechaElegida !==''){
+      iniciarSelect()
+      siguientePaso("fecha", fechaElegida, "#listadoPaso3", "#eleccionPaso2", "#paso2", "#paso3")  
     }
   })
 
   // Agregar evento al botón del paso 3
   botonPaso3.addEventListener('click', function() {
 
-    var lugarElegido = document.querySelector("#seleccionLugar").value
+    var lugarElegido = document.querySelector('#seleccionLugar').selectedOptions[0].textContent
 
-    if (lugarElegido ===''){
-      console.log("campo lugar vacio")
-    }
-
-    else {
-      guardarSessionStorage("lugar", lugarElegido)
-      document.querySelector('#paso3').style.display='none'
-      document.querySelector('#paso4').style.display='block'
+    if (lugarElegido !==''){
+      siguientePaso("lugar", lugarElegido, "#listadoPaso4", "#eleccionPaso3", "#paso3", "#paso4")
     }
   })
 
@@ -333,15 +265,9 @@ document.addEventListener('DOMContentLoaded', function() {
   botonPaso4.addEventListener('click', function() {
 
     var puntualidadElegida = document.querySelector('#puntualidad span').textContent
-
-    if (puntualidadElegida ===''){
-      console.log("campo puntualidad vacia")
-    }
-
-    else {
-      guardarSessionStorage("puntualidad", puntualidadElegida)
-      document.querySelector('#paso4').style.display='none'
-      document.querySelector('#paso5').style.display='block'  
+  
+    if (puntualidadElegida !==''){
+      siguientePaso("puntualidad", puntualidadElegida, "#listadoPaso5", "#eleccionPaso4", "#paso4", "#paso5")
     }
   })
 
@@ -350,14 +276,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var tratoElegido = document.querySelector('#trato span').textContent
 
-    if (tratoElegido ===''){
-      console.log("campo puntualidad vacia")
-    }
-
-    else {
-      guardarSessionStorage("trato", tratoElegido)
-      document.querySelector('#paso5').style.display='none'
-      document.querySelector('#paso6').style.display='block'
+    if (tratoElegido !==''){
+      siguientePaso("trato", tratoElegido, "#listadoPaso6", "#eleccionPaso5", "#paso5", "#paso6")
     }
   })
 
@@ -366,14 +286,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var ambienteElegido = document.querySelector('#ambiente span').textContent
 
-    if (ambienteElegido ===''){
-      console.log("campo ambiente vacio")
-    }
-
-    else {
-      guardarSessionStorage("ambiente", ambienteElegido)
-      document.querySelector('#paso6').style.display='none'
-      document.querySelector('#paso7').style.display='block'
+    if (ambienteElegido !==''){
+      siguientePaso("ambiente", ambienteElegido, "#listadoPaso7", "#eleccionPaso6", "#paso6", "#paso7")
     }
   })
 
@@ -382,30 +296,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var resultadoElegido = document.querySelector('#resultado span').textContent
 
-    if (resultadoElegido ===''){
-      console.log("campo resultado vacio")
-    }
-
-    else {
-      guardarSessionStorage("resultado", resultadoElegido)
-      document.querySelector('#paso7').style.display='none'
-      document.querySelector('#paso8').style.display='block'
+    if (resultadoElegido !==''){
+      siguientePaso("resultado", resultadoElegido, "#listadoPaso8", "#eleccionPaso7", "#paso7", "#paso8")
     }
   })
 
   // Agregar evento al botón del paso 8
   botonPaso8.addEventListener('click', function() {
 
-    var recomendacionElegida = document.querySelector('#seleccionRecomienda').value
+    var recomendacionElegida = document.querySelector('#seleccionRecomienda').selectedOptions[0].textContent
 
-    if (recomendacionElegida ===''){
-      console.log("campo recomendacion vacia")
-    }
-
-    else {
-      guardarSessionStorage("recomendacion", recomendacionElegida)
-      document.querySelector('#paso8').style.display='none'
-      document.querySelector('#paso9').style.display='block'
+    if (recomendacionElegida == 'No' || recomendacionElegida == 'Si'){      
+      siguientePaso("recomendacion", recomendacionElegida, "#listadoPaso9", "#eleccionPaso8", "#paso8", "#paso9")
     }
   })
 
@@ -414,14 +316,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var comentarioElegido = document.querySelector('#textarea').value
 
-    if (comentarioElegido ===''){
-      console.log("campo comentario vacio")
-    }
-
-    else {
-      guardarSessionStorage("comentario", comentarioElegido)
-      document.querySelector('#paso9').style.display='block'
-      document.querySelector('#paso10').style.display='block'
+    if (comentarioElegido !==''){
+      siguientePaso("comentario", comentarioElegido, "#listadoPaso10", "#eleccionPaso9", "#paso9", "#paso10")
       llenarDatosPaso10()
     }
   })
@@ -448,16 +344,16 @@ function llenarDatosPaso10() {
   traerTrato = parseInt(JSON.parse(sessionStorage.getItem('trato')))
   traerAmbiente = parseInt(JSON.parse(sessionStorage.getItem('ambiente')))
   traerResultado = parseInt(JSON.parse(sessionStorage.getItem('resultado')))
-  traerRecomendacion = parseInt(JSON.parse(sessionStorage.getItem('recomendacion')))
+  traerRecomendacion = (JSON.parse(sessionStorage.getItem('recomendacion')))
   traerComentario = JSON.parse(sessionStorage.getItem('comentario'))
   
     document.querySelector('#verNombre').textContent = traerNombre
     document.querySelector('#verDia').textContent = traerDia
     document.querySelector('#verLugar').textContent = traerLugar
-    document.querySelector('#verPuntualidad').textContent = traerPuntualidad
-    document.querySelector('#verTrato').textContent = traerTrato
-    document.querySelector('#verAmbiente').textContent = traerAmbiente
-    document.querySelector('#verResultado').textContent = traerResultado
+    document.querySelector('#verPuntualidad').textContent = traerPuntualidad > 1 ? traerPuntualidad + " puntos" : traerPuntualidad + " punto"
+    document.querySelector('#verTrato').textContent = traerTrato > 1 ? traerTrato + " puntos" : traerTrato + " punto"
+    document.querySelector('#verAmbiente').textContent = traerAmbiente > 1 ? traerAmbiente + " puntos" : traerAmbiente + " punto"
+    document.querySelector('#verResultado').textContent = traerResultado > 1 ? traerResultado + " puntos" : traerResultado + " punto"
     document.querySelector('#verRecomendacion').textContent = traerRecomendacion
     document.querySelector('#verComentario').textContent = traerComentario
 }
@@ -472,19 +368,29 @@ botonPaso10.addEventListener('click', function() {
   visita.agregarVisitaAVisitas()
   agregarPuntajes(traerPuntualidad, traerTrato, traerAmbiente, traerResultado, traerRecomendacion, doctorDeLaVisita, traerDia, traerComentario)
   promediar(doctorDeLaVisita)
-
-  // sessionStorage.clear()
-  document.querySelector('#paso10').style.display='none'    
-  document.querySelector('#paso1').style.display='block'
-  console.log("listo")
-  // window.location.href = "index.html"
   
-  localStorage.setItem('doctores', JSON.stringify(doctores))
-  
+  localStorage.setItem('doctores', JSON.stringify(doctores))  
   localStorage.setItem('visitas', JSON.stringify(visitas))
-
   
-
+  // sessionStorage.clear()
   
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '¡Gracias por dejar una valoración!',
+    showConfirmButton: true,
+    confirmButtonText: 'Volver al Inicio',
+    confirmButtonColor: '#49a016',
+    showDenyButton: true,
+    denyButtonText: 'Dejar otra valoración',
+    denyButtonColor: '#3085d6',
+    allowOutsideClick: false  
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "index.html";
+    } else if (result.isDenied) {
+      window.location.href = "valorar.html";
+    }
+  })
 
 })
