@@ -1,0 +1,74 @@
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    height: 100%;
+    background: url("../assets/fondo_home_70.jpg") no-repeat center 56px fixed;
+      -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: scroll;
+  }
+  
+  h2 {
+    font-family: 'Cabin', sans-serif;
+  }
+
+  @media only screen and (max-width: 600px) {
+
+    .cont_ppal {
+      text-align: center;
+      margin: 5% 15% 0 15%
+    }
+
+    .boton {
+      margin: 0    0 10px 5%;
+    }
+  }
+
+  @media only screen and (min-width: 601px) and (max-width: 992px){
+
+    .cont_ppal {
+      text-align: right;
+      margin-right: 3%;
+      float: right !important;
+    }
+
+    .boton {
+      margin: 10px 0 10px 5%;
+    }
+
+    .interno {
+      float: right !important;
+      max-width: 70%;
+    }
+
+    .interno p {
+      margin: 25px 0 25px 0;      
+    }
+  }
+
+  @media only screen and (min-width: 993px) {
+    
+    .cont_ppal {
+      text-align: right;
+      float: right !important;
+      margin-right: 3%;
+    }
+
+    .boton {
+      margin: 20px 0 10px 5%;
+    }
+
+    .interno {
+      /* margin: 5px 0 5px 0; */
+      float: right !important;
+      max-width: 80%;
+    }
+
+    .interno p {
+      margin: 25px 0 25px 0;      
+    }
+  }

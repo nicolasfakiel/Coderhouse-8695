@@ -1,0 +1,43 @@
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+
+  #section1 {
+    height: 100%;
+    background: url("../assets/fondo_buscar_50.jpg") no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-y: inherit;
+  }
+  
+  h3 {
+    font-family: 'Cabin', sans-serif;
+  }
+
+  .cont_ppal {
+    margin-bottom: 0px;
+  }
+
+  .cont_buscador {
+    margin-top: 110px;
+    margin-bottom: 0px;
+  }
+
+  .cont_buscador label {
+    color: black;
+    font-weight: bold;
+  }
+
+  #listaComentarios li:nth-child(odd) {
+    background-Color: #d9eaff94;
+    padding: 1%;
+    margin: 1% 0 1% 0;
+  }
+
+  #listaComentarios li:nth-child(even) {
+    background-Color: #180ebb82;
+    padding: 1%;
+    margin: 1% 0 1% 0;
+  }
