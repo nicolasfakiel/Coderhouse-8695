@@ -4,13 +4,12 @@
 
    body {
     height: 100%;
-    background: url("../assets/test.jpg") no-repeat center 10px fixed;
+    background: url("../assets/fondo_quienes_somos_50.jpg") no-repeat center 10px fixed;
       -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     background-attachment: scroll;
-        /* background-position-x: initial; */
   }
   
   h3, h4, h5, h6{
@@ -21,51 +20,22 @@
     margin-top: 50px !important;
     float: none !important;
     margin: auto;
-    text-align: center;
-    /* border: 1px solid black; */
+    padding: 5px 40px 5px 40px !important;
     background-color: rgb(255,255,255,0.8);
+    max-width: 50% !important;
   }
-
-  /* @media only screen and (max-width: 600px) {
+  
+  @media only screen and (max-width: 600px) {
 
     .cont_ppal {
-      text-align: center;
-      margin: 5% 15% 0 15%
-    }
-
-    .boton {
-      margin: 0    0 10px 5%;
-    }
+      max-width: 90% !important;
+      padding: 5px 20px 5px 20px !important;
+    }    
   }
 
-  @media only screen and (min-width: 601px) and (max-width: 992px){
+  @media only screen and (min-width: 601px) and (max-width: 1200px){
 
     .cont_ppal {
-      text-align: right;
-      margin-right: 3%;
-      float: right !important;
-    }
-
-    .boton {
-      margin: 10px 0 10px 5%;
-    }
-
-    .interno {
-      float: right !important;
-      max-width: 70%;
-    }
-
-    .interno p {
-      margin: 25px 0 25px 0;      
+      max-width: 90% !important;
     }
   }
-
-  @media only screen and (min-width: 993px) {
-    
-    .cont_ppal {
-      float: none !important;
-      margin: auto;
-      text-align: center;
-      border: 1px solid black
-    }
-  } */
