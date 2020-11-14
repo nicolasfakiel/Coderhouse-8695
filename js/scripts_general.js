@@ -7,12 +7,6 @@ y puntajes que les dan los pacientes que fueron atendidos por ellos*/
 var doctores = []
 
 // Cargar los doctores al inicio (archivo JSON la primera vez y Local Storage las siguientes)
-
-
-// $(document).ready(function(){ //nuevo
-document.addEventListener("DOMContentLoaded", function() {
-
-
 if (localStorage.doctores) {
   var doctores = JSON.parse(localStorage.doctores)
 } else {
@@ -25,9 +19,7 @@ if (localStorage.doctores) {
       })
     }
   })
-}
-
-}) //nuevo
+} 
 
 // Rellenar el Autocomplete con los datos de los doctores
 function pasarDocsAlAutocomplete(){
@@ -40,10 +32,12 @@ function pasarDocsAlAutocomplete(){
 
 // Inicializar el Autocomplete
 $(document).ready(function(){
-  $('input.autocomplete').autocomplete({
-    data: pasarDocsAlAutocomplete(),
-  });
+
+setTimeout($('input.autocomplete').autocomplete({
+  data: pasarDocsAlAutocomplete()}), 500)
 })
+
+
 
 // Consctructor de doctores (No se usa porque se pasó a usar AJAX)
 function nuevoDoctor(nombre, lugarDeAtencion1, lugarDeAtencion2, lugarDeAtencion3) {
