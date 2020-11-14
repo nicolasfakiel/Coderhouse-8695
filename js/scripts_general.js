@@ -3,6 +3,7 @@ Los doctores son uno de los principales objetos del proyecto.
 Tienen propiedades estátcas como nombre y lugares de atención y otras dinámicas que son las recomendaciones
 y puntajes que les dan los pacientes que fueron atendidos por ellos*/
 
+
 // Listado de doctores
 var doctores = []
 
@@ -33,8 +34,17 @@ function pasarDocsAlAutocomplete(){
 // Inicializar el Autocomplete
 $(document).ready(function(){
 
-setTimeout($('input.autocomplete').autocomplete({
-  data: pasarDocsAlAutocomplete()}), 500)
+setTimeout(() => {
+  $('input.autocomplete').autocomplete({
+    data: pasarDocsAlAutocomplete()
+  })
+  
+}, 500);
+
+
+
+// setTimeout($('input.autocomplete').autocomplete({
+  // data: pasarDocsAlAutocomplete()}),   500)
 })
 
 
